@@ -8,18 +8,20 @@ public class SetCalculator {
 	public static int defaultDisplay(int x, int y, int limit, int h, int w)
 	{
 		int counter = 0;
-		Complex z = new Complex((((x/w)) * ((1.0-(-2.5))+(-2.5))), (((y/h)) * (1.0-(-1.0))+(-1.0)));
-		Complex zOrg = z;
-		while(counter <= limit)
+		Complex z = new Complex(((x/((double)w)) * (1.0-(-2.5)))+(-2.5), ((y/((double)h)) * (1.0-(-1.0)))+(-1.0));
+		Complex zOrg = new Complex(((x/((double)w)) * (1.0-(-2.5)))+(-2.5), ((y/((double)h)) * (1.0-(-1.0)))+(-1.0));
+		while(counter < limit)
 		{
 			if(z.abs() > 2.0)
 				return counter;
-			z = (z.exp()).plus(zOrg);
+			z = ((z.times(z)).plus(zOrg));
 			counter++;
-			
 		}
-		return limit;
+			
+			
+			return limit;
 	}
+}
 	
 
-}
+
