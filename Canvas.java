@@ -341,3 +341,61 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
    
 }
+
+class RainbowGradient {
+	
+	// Defines the list of seed colors
+	private Color[] test = new Color[] {Color.RED, Color.ORANGE};
+	
+	private Color[] greyscale = new Color[] {Color.BLACK, Color.WHITE};
+	
+	private Color[] greenscale = new Color[] {Color.BLACK, Color.GREEN};
+	
+	private Color[] rainbow = new Color[] {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
+	
+	// Defines the list of all gradients 
+	List<Color> colors = new ArrayList<Color>();
+	
+	private int n;
+	
+	   // The singleton instance variable
+	   private static RainbowGradient instance;
+	   
+	   public static RainbowGradient getInstance() {
+	      if (instance == null) {
+	         instance = new RainbowGradient(32);
+	      }
+	      
+	      return instance;
+	   }
+
+
+	// Constructor 
+	   
+	private RainbowGradient(double n) {
+		this.n = n;
+		
+	}
+	
+	
+	
+	private void ColorGradientMaker() {
+		
+		private final s = test.length();
+				
+		// keep appending items for each seed color
+		// n is the number of gradient colors, test is the number of seed colors
+		for (int n = 0; n < this.n - 1; n++) {
+			colors.add(null);
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
+}
+
+
