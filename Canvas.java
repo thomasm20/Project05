@@ -311,14 +311,18 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
          // Iterate over each pixel in the render chunk
          for(int x = renderX; x < renderX + chunkSize; x++) {
              for(int y = renderY; y < renderY + chunkSize; y++) {
-               // Get the mandelbrot limit for that x/y
-               // ???
+               int val = SetCalculator.defaultDisplay(x, y, 32, height, width);
                
+            	 
                
                // Set the pixel in the image to the appropriate color
-               image.setRGB(x, y, Color.BLACK.getRGB());
+           	if(val == 32)
+               		image.setRGB(x, y, Color.BLACK.getRGB());
+           	else
+           		image.setRGB(x,  y, Color.white.getRGB());
              }
          }
+         
          
          // Move to next chunk
          renderX += chunkSize;
