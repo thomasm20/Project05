@@ -136,9 +136,35 @@ public class Mandelbrot extends JFrame implements ActionListener{
         
     }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+    @Override
+    public void actionPerformed(ActionEvent e) {
 		
-	}
+	if (e.getSource() == increaseButton){
+        	System.out.println("increase limit");
+    	}
+    
+    	if (e.getSource() == decreaseButton){
+        	System.out.println("decrease limit");
+    	}
+    
+    	if (e.getSource() == resetButton){
+       		System.out.println("reset");
+   	}
+    
+    	if (e.getSource() == saveImageButton){
+        	System.out.println("save image");
+    	}
+    
+    	if (e.getSource() == savePosButton){
+        	System.out.println("save position");
+    	}
+    
+    	if (e.getSource() == loadButton){
+        	System.out.println("Load Position");
+    	}
+    
+    	if (e.getSource() == gradientButton){
+        	System.out.println("Edit Gradient");
+    	}
+    }
 }
