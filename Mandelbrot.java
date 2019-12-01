@@ -151,7 +151,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
        		System.out.println("reset");
    	}
     
-    	if (e.getSource() == saveImageButton){
+    	if (e.getSource() == saveImaButton){
         	System.out.println("save image");
     	}
     
@@ -163,7 +163,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
         	System.out.println("Load Position");
     	}
     
-    	if (e.getSource() == gradientButton){
+    	if (e.getSource() == editButton){
         	System.out.println("Edit Gradient");
     	}
     }
