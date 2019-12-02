@@ -1,4 +1,6 @@
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +18,8 @@ public class Mandelbrot extends JFrame implements ActionListener{
     private JButton savePosButton;
     private JButton loadButton;
     private JButton editButton;
+    
+    private int limit;
    
     public Mandelbrot(){
         
@@ -136,35 +140,22 @@ public class Mandelbrot extends JFrame implements ActionListener{
         
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand() == "Increase Limit") {
+			this.canvas.limit = this.canvas.limit*2;
+			this.canvas.resetRender();
+		}
+		else if (e.getActionCommand() == "Decrease Limit") {
+			this.canvas.limit = this.canvas.limit/2;
+			this.canvas.resetRender();
+		}
+		else if(e.getActionCommand() == "Reset") {
+			this.canvas.limit = 32;
+			this.canvas.resetRender();
+		}
 		
-	if (e.getSource() == increaseButton){
-        	System.out.println("increase limit");
-    	}
-    
-    	if (e.getSource() == decreaseButton){
-        	System.out.println("decrease limit");
-    	}
-    
-    	if (e.getSource() == resetButton){
-       		System.out.println("reset");
-   	}
-    
-    	if (e.getSource() == saveImaButton){
-        	System.out.println("save image");
-    	}
-    
-    	if (e.getSource() == savePosButton){
-        	System.out.println("save position");
-    	}
-    
-    	if (e.getSource() == loadButton){
-        	System.out.println("Load Position");
-    	}
-    
-    	if (e.getSource() == editButton){
-        	System.out.println("Edit Gradient");
-    	}
-    }
+		
+	}
 }
