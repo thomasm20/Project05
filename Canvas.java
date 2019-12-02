@@ -30,6 +30,10 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    private BufferedImage image;
    private Graphics2D gImg;
    private double scale;
+   private double xMax;
+   private double yMax;
+   
+   public int limit;
    
    // Final variables
    final private Color colorSelect = new Color(0, 200, 200);
@@ -91,6 +95,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
       renderX = 0;
       renderY = 0;
+      limit = 32;
       drawRect = null;
       
       // Listen for mouse movement or input
@@ -183,7 +188,9 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       updateRectangle();
       
       // Resize the viewing area here
-      
+      xMax = e.getX();
+      yMax = e.getY();
+      render();
       // Free up the draw variables
       drawRect = null;
       posStart = null;
@@ -307,18 +314,18 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
       // If we're not done with the entire image...
       if (!doneRendering) {
-         
          // Iterate over each pixel in the render chunk
          for(int x = renderX; x < renderX + chunkSize; x++) {
              for(int y = renderY; y < renderY + chunkSize; y++) {
-               // Get the mandelbrot limit for that x/y
-               // ???
-               
-               
+               int val = SetCalculator.defaultDisplay(x, y, limit, height, width, xMax, yMax);
                // Set the pixel in the image to the appropriate color
-               image.setRGB(x, y, Color.BLACK.getRGB());
+           	if(val == limit)
+               		image.setRGB(x, y, Color.black.getRGB());
+           	else
+           		image.setRGB(x,  y, Color.white.getRGB());
              }
          }
+         
          
          // Move to next chunk
          renderX += chunkSize;
@@ -341,3 +348,61 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
    
 }
+
+//class RainbowGradient {
+//	
+//	// Defines the list of seed colors
+//	private Color[] test = new Color[] {Color.RED, Color.ORANGE};
+//	
+//	private Color[] greyscale = new Color[] {Color.BLACK, Color.WHITE};
+//	
+//	private Color[] greenscale = new Color[] {Color.BLACK, Color.GREEN};
+//	
+//	private Color[] rainbow = new Color[] {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
+//	
+//	// Defines the list of all gradients 
+//	List<Color> colors = new ArrayList<Color>();
+//	
+//	private int n;
+//	
+//	   // The singleton instance variable
+//	   private static RainbowGradient instance;
+//	   
+//	   public static RainbowGradient getInstance() {
+//	      if (instance == null) {
+//	         instance = new RainbowGradient(32);
+//	      }
+//	      
+//	      return instance;
+//	   }
+//
+//
+//	// Constructor 
+//	   
+//	private RainbowGradient(int n) {
+//		this.n = n;
+//		
+//	}
+//	
+//	
+//	
+//	private void ColorGradientMaker() {
+//		
+//		private final s = test.length();
+//				
+//		// keep appending items for each seed color
+//		// n is the number of gradient colors, test is the number of seed colors
+//		for (int n = 0; n < this.n - 1; n++) {
+//			colors.add(null);
+//		}
+//		
+//		
+//		
+//		
+//	}
+//	
+//	}
+	
+
+
+
