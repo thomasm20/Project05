@@ -348,59 +348,127 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
 }
 
-//class RainbowGradient {
-//	
-//	// Defines the list of seed colors
-//	private Color[] test = new Color[] {Color.RED, Color.ORANGE};
-//	
-//	private Color[] greyscale = new Color[] {Color.BLACK, Color.WHITE};
-//	
-//	private Color[] greenscale = new Color[] {Color.BLACK, Color.GREEN};
-//	
-//	private Color[] rainbow = new Color[] {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
-//	
-//	// Defines the list of all gradients 
-//	List<Color> colors = new ArrayList<Color>();
-//	
-//	private int n;
-//	
-//	   // The singleton instance variable
-//	   private static RainbowGradient instance;
-//	   
-//	   public static RainbowGradient getInstance() {
-//	      if (instance == null) {
-//	         instance = new RainbowGradient(32);
-//	      }
-//	      
-//	      return instance;
-//	   }
-//
-//
-//	// Constructor 
-//	   
-//	private RainbowGradient(int n) {
-//		this.n = n;
-//		
-//	}
-//	
-//	
-//	
-//	private void ColorGradientMaker() {
-//		
-//		private final s = test.length();
-//				
-//		// keep appending items for each seed color
-//		// n is the number of gradient colors, test is the number of seed colors
-//		for (int n = 0; n < this.n - 1; n++) {
-//			colors.add(null);
-//		}
-//		
-//		
-//		
-//		
-//	}
-//	
-//	}
+class RainbowGradient {
+	
+	// Defines the list of seed colors
+	private Color[] test = new Color[] {Color.RED, Color.GREEN, Color.BLUE};
+	
+	private Color[] greyscale = new Color[] {Color.BLACK, Color.WHITE};
+	
+	private Color[] greenscale = new Color[] {Color.BLACK, Color.GREEN};
+	
+	private Color[] rainbow = new Color[] {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
+	
+	// Defines the list of all gradients 
+	private List<Color> colors = new ArrayList<Color>();
+	
+	private int n;
+	
+	private Color[] current = null;
+	
+	
+	
+	   // The singleton instance variable
+	   private static RainbowGradient instance;
+	   
+	   public static RainbowGradient getInstance() {
+	      if (instance == null) {
+	         instance = new RainbowGradient(32);
+	      }
+	      
+	      return instance;
+	   }
+
+
+	// Constructor 
+	   
+	private RainbowGradient(int n) {
+		this.n = n;
+		
+		this.current = rainbow;
+		
+		colorGradientMaker();
+	}
+	
+	
+	// Method that sets the value of current
+	
+	public void stateOfCurrent(String state) {
+		if (state == "Rainbow") {
+			this.current = rainbow;
+		}
+		
+		if (state == "Test") {
+			this.current = test;
+		}
+		
+		if (state == "Greyscale") {
+			this.current = greyscale;
+		}
+		
+		if (state == "Greenscale") {
+			this.current = greenscale;
+		}
+		
+		
+		colorGradientMaker();
+	}
+	
+	//Method that updates the limit and then runs the colorGradientMaker method to update it in there too
+	
+	public void stateOfLimit(int limit) {
+		this.n = limit;
+		
+		colorGradientMaker();
+	}
+	
+	public void colorGradientMaker() {
+		
+		double numColors = (n-1);
+		double shadesPerColor = (numColors/(current.length-1));
+		int max = 255;
+		int min = 0;
+				
+		// keep appending items for each seed color
+		// n is the number of gradient colors, test is the number of seed colors
+		
+		for (int i = 0; i < n; i++) {
+
+			int shade = (int) (i/shadesPerColor);	
+			int iModded = (i % ((int) shadesPerColor));
+			double dist = (iModded/shadesPerColor);
+			double red1 = current[shade].getRed();
+			double green1 = current[shade].getGreen();
+			double blue1 = current[shade].getBlue();
+			double red2 = current[(Math.min(shade + 1,current.length-1))].getRed();
+			double green2 = current[(Math.min(shade + 1,current.length-1))].getGreen();
+			double blue2 = current[(Math.min(shade + 1,current.length-1))].getBlue();
+			double redDiff = red2 - red1;
+			double greenDiff = green2 - green1;
+			double blueDiff = blue2 - blue1;
+
+			
+			red1 = Math.min(Math.max(red1 + (redDiff * dist),  min), max);
+			
+
+
+			green1 = Math.min(Math.max(green1 + (greenDiff * dist), min), max);
+
+
+
+			blue1 = Math.min(Math.max(blue1 + (blueDiff * dist), min), max);
+			
+			current[shade] = new Color((int) red1, (int) green1, (int) blue1);			
+			colors.add(current[shade]);
+			System.out.print(current[shade]);
+		}
+		
+
+		
+		
+	}
+	
+}
 	
 
 
