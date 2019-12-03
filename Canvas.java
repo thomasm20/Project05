@@ -30,10 +30,9 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    private BufferedImage image;
    private Graphics2D gImg;
    private double scale;
-   private double xMax;
-   private double yMax;
    
    public int limit;
+   public SetCalculator calc;
    
    // Final variables
    final private Color colorSelect = new Color(0, 200, 200);
@@ -96,6 +95,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       renderX = 0;
       renderY = 0;
       limit = 32;
+      calc = new SetCalculator(-2.5, 1.0, -1.0, 1.0);
       drawRect = null;
       
       // Listen for mouse movement or input
@@ -188,9 +188,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       updateRectangle();
       
       // Resize the viewing area here
-      xMax = e.getX();
-      yMax = e.getY();
-      render();
+      calc.updateDisplay(drawRect.getX(), drawRect.getX()+drawRect.getWidth(),
+    		  drawRect.getY(), drawRect.getY()+drawRect.getHeight(), drawRect.getWidth(), drawRect.getHeight());
       // Free up the draw variables
       drawRect = null;
       posStart = null;
@@ -317,7 +316,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
          // Iterate over each pixel in the render chunk
          for(int x = renderX; x < renderX + chunkSize; x++) {
              for(int y = renderY; y < renderY + chunkSize; y++) {
-               int val = SetCalculator.defaultDisplay(x, y, limit, height, width, xMax, yMax);
+               int val = calc.defaultDisplay(x, y, limit, height, width);
                // Set the pixel in the image to the appropriate color
            	if(val == limit)
                		image.setRGB(x, y, Color.black.getRGB());
