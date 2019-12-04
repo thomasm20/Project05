@@ -7,7 +7,7 @@ By Mitchell Thomas, Joe Salerno, and Brendan Olski
 
 ===Features===
 --Selection of shapes--
-Describe how you programmed the selection of shapes in a general sense, include descriptions of any patterns you used.
+Describe how you programmed the Mandelbrot set dispaly in a general sense, include descriptions of any patterns you used.
 --Dragged shape preview--
 etc
 --Other features--
@@ -29,8 +29,8 @@ image: pivate BufferedImage
 gImg: private Graphics2D
 scale: private double variable
 gradient: private RainbowGradient
-switched: private boolean
 
+switched: public boolean
 limit: public int variable
 calc: public SetCalculator
 currentGradient: public String variable
@@ -79,24 +79,71 @@ getColors() -
 Complex.java contains a Complex class that
 
 --Variables--
-
+re: private final double variable that represents the real part
+im: private final double variable that represents the imaginary part
 
 --Methods--
-Complex(..) - Constructor method...
+Complex(double real, double imag) - Constructor method that creastes a new object with the given real and imaginary parts
+toString() - returns a string representation of the invoking Complex object
+abs() - returns abs/modulus/magnitude
+phase() - return angle/phase/argument, normalized to be between -pi and pi
+plus(Complex b) - return a new Complex object whose value is (this + b)
+minus(Complex b) - return a new Complex object whose value is (this - b)
+times(Complex b) - return a new Complex object whose value is (this * b)
+divides(Complex b) - return a / b
+scale(double alpha) - return a new object whose value is (this * alpha)
+conjugate() - return a new Complex object whose value is the conjugate of this
+reciprocal - return a new Complex object whose value is the reciprocal of this
+re() - return the real part
+im() - return the imaginary part
+exp() - return a new Complex object whose value is the complex exponential of this
+sin() - return a new Complex object whose value is the complex sine of this
+cos() - return a new Complex object whose value is the complex cosine of this
+tan() - return a new Complex object whose value is the complex tangent of this
+plus(Complex a, Complex b) - a static version of plus
+
+equals(Object x) - 
+hashCode() - 
+
+main(String[] args) - sample client for testing
 
 ===Mandelbrot===
-Mandelbrot.java contains a Mandelbrot class that 
+Mandelbrot.java contains a Mandelbrot class that extends JFrame and implements ActionListener to ...
 
 --Variables--
+canvas: private Canvas 
+increaseButton: private JButton 
+decreaseButton: private JButton 
+resetButton: private JButton  
+saveImaButton: private JButton 
+savePosButton: private JButton 
+loadButton: private JButton 
+editButton: private JButton 
 
+positionDisplay: public JLabel 
+combo: public JComboBox 
+appFrame: public static Mandelbrot 
 
 --Methods--
-
+Mandelbrot() - Constructor method 
+main(String[] args) - 
+actionPerformed(ActionEvent e) - 
 
 ===SetCalculator===
 SetCalculator.java contains a SetCalculator class that 
 
 --Variables--
-
+xMin: private static double 
+xMax: private static double 
+yMin: private static double 
+yMax: private static double 
 
 --Methods--
+SetCalculator(double xMin, double xMax, double yMin, double yMax) - Constructor method
+defaultDisplay(int x, int y, int limit, int h, int w) - 
+juliaDisplay(int x, int y, int limit, int h, int w) - 
+updateDisplay(double xMi, double xMa, double yMi, double yMa, double width, double height) - 
+getXMIN() - 
+getXMAX() - 
+getYMIN() - 
+getYMAX() - 
