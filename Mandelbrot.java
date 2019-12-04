@@ -172,14 +172,24 @@ public class Mandelbrot extends JFrame implements ActionListener{
 		
 		//RESET BUTTON
 		else if(e.getActionCommand().equals("Reset")) {
-			appFrame = new Mandelbrot();
+			this.canvas.limit = 32;
+			this.canvas.currentSet = "Mandelbrot Set";
+			this.canvas.calc = new SetCalculator(-2.5, 1.0, -1.0, 1.0);
+		    this.canvas.switched = false;
+		    
 			this.canvas.resetRender();
 		}
 		
 		//COMBO BOX CHANGED
 		else if(e.getActionCommand().equals("comboBoxChanged")) {
-			appFrame = new Mandelbrot();
 			this.canvas.currentSet = (String)combo.getSelectedItem();
+			
+			//change range display
+			if(((String)combo.getSelectedItem()).equals("Mandelbrot Set"))
+				positionDisplay.setText("Ranges:  x: [-2.5. 1.0]  y: [-1.0, 1.0]");
+			else
+				positionDisplay.setText("Ranges:  x: [-1.5. 1.5]  y: [-1.5, 1.5]");
+			
 			this.canvas.resetRender();
 		}
 		

@@ -33,8 +33,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    private Graphics2D gImg;
    private double scale;
    private RainbowGradient gradient;
-   private boolean switched;
    
+   public boolean switched;
    public int limit;
    public SetCalculator calc;
    public String currentGradient;
@@ -208,7 +208,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       //for display
       Mandelbrot.appFrame.positionDisplay.setText(("Ranges:\t     x: [" + calc.getXMIN() + "," + calc.getXMAX()  + " ]"
        		+ "    y: [" + calc.getYMIN() + ", " + calc.getYMAX() + " ]"));
-	      
       }
       // Free up the draw variables
       drawRect = null;
@@ -399,15 +398,11 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    {
 	   switched = true;
 	   calc = new SetCalculator(-1.5, 1.5, -1.5, 1.5);
-	 //for display
-	   Mandelbrot.appFrame.positionDisplay.setText(("Ranges:\t     x: [-1.5, 1.5]    y: [-1.5, 1.5]"));
    }
    public void switchBackToMandelbrot()
    {
 	   switched = false;
 	   calc = new SetCalculator(-2.5, 1.0, -1.0, 1.0);
-	 //for display
-       Mandelbrot.appFrame.positionDisplay.setText(("Ranges:\t     x: [-2.5, 1.0]    y: [-1.0, 1.0]"));
    }
    
 }
