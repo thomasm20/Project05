@@ -205,10 +205,11 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       calc.updateDisplay(drawRect.getX(), drawRect.getX()+drawRect.getWidth(),
     		  drawRect.getY(), drawRect.getY()+drawRect.getHeight(), width, height);
       
-      }
       //for display
       Mandelbrot.appFrame.positionDisplay.setText(("Ranges:\t     x: [" + calc.getXMIN() + "," + calc.getXMAX()  + " ]"
        		+ "    y: [" + calc.getYMIN() + ", " + calc.getYMAX() + " ]"));
+	      
+      }
       // Free up the draw variables
       drawRect = null;
       posStart = null;
