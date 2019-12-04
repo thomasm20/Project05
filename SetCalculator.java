@@ -33,18 +33,48 @@ public class SetCalculator {
 			return limit;
 	}
 	
+	public static int juliaDisplay(int x, int y, int limit, int h, int w)
+	{
+		int counter = 0;
+		Complex z = new Complex(((x/((double)w)) * (xMax-xMin))+(xMin), ((y/((double)h)) * (yMax-yMin))+(yMin));
+		Complex c = new Complex(-0.1, 0.65);
+		while(counter < limit)
+		{
+			if(z.abs() > 2.0)
+				return counter;
+			z = ((z.times(z)).plus(c));
+			counter++;
+		}
+			
+			
+			return limit;
+	}
 	public void updateDisplay(double xMi, double xMa, double yMi, double yMa, double width, double height) {
 		
-		Complex topLeft = new Complex(((xMi/((double)width)) * (xMax-(xMin)))+(xMin), ((yMa/((double)height)) * (yMax-(yMin)))+(yMin));
-		Complex bottomRight = new Complex(((xMa/((double)width)) * (xMax-(xMin)))+(xMin), ((yMi/((double)height)) * (yMax-(yMin)))+(yMin));
-		System.out.println(topLeft);
-		System.out.println(bottomRight);
+		Complex topLeft = new Complex(((xMi/((double)width)) * (xMax-(xMin)))+(xMin), ((yMi/((double)height)) * (yMax-(yMin)))+(yMin));
+		Complex bottomRight = new Complex(((xMa/((double)width)) * (xMax-(xMin)))+(xMin), ((yMa/((double)height)) * (yMax-(yMin)))+(yMin));
 		xMin = topLeft.re();
-		yMin = bottomRight.im();
+		yMax = bottomRight.im();
 		xMax = bottomRight.re();
-		yMax = topLeft.im();
+		yMin = topLeft.im();
 		
 		
+	}
+	public double getXMIN()
+	{
+		return xMin - (xMin % 0.01);
+	}
+	public double getXMAX()
+	{
+		return xMax - (xMax % 0.01);
+	}
+	public double getYMIN()
+	{
+		return yMin - (yMin % 0.01);
+	}
+	public double getYMAX()
+	{
+		return yMax - (yMax % 0.01);
 	}
 }
 	
