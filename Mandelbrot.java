@@ -20,6 +20,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
     private JButton loadButton;
     private JButton editButton;
     public JLabel positionDisplay;
+    private JComboBox gradientBox;
     
    
     public Mandelbrot(){
@@ -80,7 +81,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
        	  positionConst.insets = new Insets(10, 10, 10, 10);
        	  add(resetButton, positionConst);
        	  
-       //=====Combo Box=====
+       //=====Combo Box Sets=====
        	String[] items = {"Mandelbrot Set", "Julia Set"};
        combo = new JComboBox(items);
          // Use "this" class to handle button presses
@@ -91,7 +92,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
          add(combo, positionConst);
          
        //=====Save Image=====
-       saveImaButton = new JButton("Save Image");
+       saveImaButton = new JButton("Save Image N/A");
          // Use "this" class to handle button presses
           saveImaButton.addActionListener(this);
           positionConst.gridx = 1;
@@ -100,7 +101,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
           add(saveImaButton, positionConst);
          	  
        //=====Save Position=====
-       savePosButton = new JButton("Save Position");
+       savePosButton = new JButton("Save Position N/A");
            
         // Use "this" class to handle button presses
          savePosButton.addActionListener(this);
@@ -110,7 +111,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
          add(savePosButton, positionConst);
            	  
       //=====Load Pos=====
-       loadButton = new JButton("Load Position");
+       loadButton = new JButton("Load Position N/A");
              
         // Use "this" class to handle button presses
          loadButton.addActionListener(this);
@@ -120,14 +121,16 @@ public class Mandelbrot extends JFrame implements ActionListener{
        	 add(loadButton, positionConst);
              	  
       //=====Edit Gradient=====
-        editButton = new JButton("Edit Gradient");
-               
-        // Use "this" class to handle button presses
-         editButton.addActionListener(this);
-         positionConst.gridx = 4;
-         positionConst.gridy = 2;
-         positionConst.insets = new Insets(10, 10, 10, 10);
-         add(editButton, positionConst);
+       	String[] gradients = {"Original Gradient", "Rainbow Gradient", "Greyscale Gradient", "Greenscale Gradient"};
+       	gradientBox = new JComboBox(gradients);
+          // Use "this" class to handle button presses
+          gradientBox.addActionListener(this);
+          gradientBox.setActionCommand("gradientChanged");
+          positionConst.gridx = 4;
+          positionConst.gridy = 2;
+          positionConst.insets = new Insets(10, 10, 10, 10);
+          add(gradientBox, positionConst);
+          
      	
        //=====Position Display=====
          positionDisplay = new JLabel("Ranges:  x: [-2.5. 1.0]  y: [-1.0, 1.0]");
@@ -137,7 +140,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
           positionConst.gridy = 3;
           positionConst.insets = new Insets(10, 10, 10, 10);
           add(positionDisplay, positionConst);
-      	
+          
          
     }
     
@@ -173,34 +176,51 @@ public class Mandelbrot extends JFrame implements ActionListener{
 		//RESET BUTTON
 		else if(e.getActionCommand().equals("Reset")) {
 			this.canvas.limit = 32;
-			this.canvas.currentSet = "Mandelbrot Set";
-			this.canvas.calc = new SetCalculator(-2.5, 1.0, -1.0, 1.0);
-		    this.canvas.switched = false;
-		    
+			if(this.canvas.currentSet.equals("Mandelbrot Set"))
+			{
+				this.canvas.calc = new SetCalculator(-2.5, 1.0, -1.0, 1.0);
+				positionDisplay.setText("Ranges:  x: [-2.5. 1.0]  y: [-1.0, 1.0]");
+			}
+			else {
+				this.canvas.calc = new SetCalculator(-1.5, 1.5, -1.5, 1.5);
+				positionDisplay.setText("Ranges:  x: [-1.5. 1.5]  y: [-1.5, 1.5]");
+			}
 			this.canvas.resetRender();
 		}
 		
 		//COMBO BOX CHANGED
 		else if(e.getActionCommand().equals("comboBoxChanged")) {
-			this.canvas.currentSet = (String)combo.getSelectedItem();
 			
-			//change range display
+			//change range and update currentSet in canvas
 			if(((String)combo.getSelectedItem()).equals("Mandelbrot Set"))
+			{
 				positionDisplay.setText("Ranges:  x: [-2.5. 1.0]  y: [-1.0, 1.0]");
+				this.canvas.currentSet = (String)combo.getSelectedItem();
+			}
 			else
+			{
 				positionDisplay.setText("Ranges:  x: [-1.5. 1.5]  y: [-1.5, 1.5]");
+				this.canvas.currentSet = (String)combo.getSelectedItem();
+			}
 			
 			this.canvas.resetRender();
 		}
+		else if(e.getActionCommand().equals("gradientChanged"))
+		{
+			//update currentGradient in canvas
+			if(((String)gradientBox.getSelectedItem()).equals("Original Gradient"))
+				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
+			else if(((String)gradientBox.getSelectedItem()).equals("Rainbow Gradient"))
+				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
+			else if(((String)gradientBox.getSelectedItem()).equals("Greyscale Gradient"))
+				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
+			else				
+				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
+			
+			
+			this.canvas.resetRender();
+			
+		}
 		
-		//EDIT GRADIENT
-//		else if(e.getActionCommand() == "Edit Gradient")
-//		{
-//			System.out.println((String)combo.getSelectedItem());
-//			this.canvas.currentGradient = (String)combo.getSelectedItem();
-//			this.canvas.resetRender();
-//		}
-//		
-		//COMBO BOX RETRIEVES SET
 	}
 }

@@ -7,6 +7,7 @@ public class SetCalculator {
 	private static double yMin;
 	private static double yMax;
 	
+	//constructor
 	public SetCalculator(double xMin, double xMax, double yMin, double yMax)
 	{
 		this.xMin = xMin;
@@ -14,8 +15,7 @@ public class SetCalculator {
 		this.yMin = yMin;
 		this.yMax = yMax;
 	}
-	//Not even close to done, just doing random stuff
-	//x is  % of w, x/w = p, p * (max-min) + min to figure out location on # line
+	
 	public static int defaultDisplay(int x, int y, int limit, int h, int w)
 	{
 		int counter = 0;
@@ -60,18 +60,25 @@ public class SetCalculator {
 		
 		
 	}
+	
+	//returns xMin for display on the canvas
 	public double getXMIN()
 	{
 		return xMin - (xMin % 0.01);
 	}
+	
+	//returns xMax for display on the canvas
 	public double getXMAX()
 	{
 		return xMax - (xMax % 0.01);
 	}
+	
+	//returns yMin for display on the canvas
 	public double getYMIN()
 	{
 		return yMin - (yMin % 0.01);
 	}
+	//returns yMax for display on the canvas
 	public double getYMAX()
 	{
 		return yMax - (yMax % 0.01);
