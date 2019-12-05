@@ -7,12 +7,14 @@ import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import java.lang.Thread;
+import java.util.List;
+import java.util.ArrayList;
 
 
-/*
+/**
  * Draws the pixels stored in the BufferedImage variable image in chunks.
  * Yields thread control for visual updates between chunks.
- * Selects a 3.5:2 rectangle when clicked on
+ * Selects a 3.5:2 rectangle when clicked on, or 1:1 depending on the set
  * 
  * @author Liz Matthews
  * 
@@ -30,12 +32,19 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    private BufferedImage image;
    private Graphics2D gImg;
    private double scale;
+   private RainbowGradient gradient;
+   
+   public boolean switched;
+   public int limit;
+   public SetCalculator calc;
+   public String currentGradient;
+   public String currentSet;
    
    // Final variables
    final private Color colorSelect = new Color(0, 200, 200);
    final private int chunkSize = 50;
    
-   /*
+   /**
     * Default constructor for the canvas. Sets the scale to 1.
     * @author Liz Matthews
     * 
@@ -55,10 +64,9 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       resetRender();
       
       
-      
    }
    
-   /*
+   /**
     * Scaled constructor for the canvas. Sets the scale to the parameter passed in.
     * @author Liz Matthews
     * @param scale   how much to scale up the canvas from the default size of 350 by 200
@@ -68,6 +76,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       super();
       
       this.scale = scale;
+      
       
       setup();
       
@@ -79,7 +88,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
    }
    
-   /*
+   /**
     * Method to set up certain variables. Kept separate from the constructor so that setupCanvas and resetRender can be used elsewhere.
     * @author Liz Matthews
     * 
@@ -91,6 +100,12 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
       renderX = 0;
       renderY = 0;
+      limit = 32;
+      currentGradient = "Original Gradient";
+      gradient = new RainbowGradient(limit);
+      currentSet = "Mandelbrot Set";
+      calc = new SetCalculator(-2.5, 1.0, -1.0, 1.0);
+      switched = false;
       drawRect = null;
       
       // Listen for mouse movement or input
@@ -99,7 +114,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
    }
    
-   /*
+   /**
     * Method to create the images for the canvas
     * @author Liz Matthews
     * 
@@ -108,6 +123,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       // Solid dimensions
       width = (int)(350 * scale);
       height = (int)(width * (2 / 3.5));
+	 
       
       // Image which is drawn upon
       image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -116,7 +132,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
    }
    
-   /*
+   /**
     * Overridden paintComponent to draw the BufferedImage variable to the panel
     * @author Liz Matthews
     * @param g Graphics variable linked to this panel
@@ -156,7 +172,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
    
    
-   /*
+   /**
     * Method to detect click on the canvas. Sets up a position start and end and invokes {@link #updateRectangle()} to update the drag rectangle dimensions.
     * @author Liz Matthews
     * @param e Mouse event that occured
@@ -171,7 +187,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       }
    }
 
-   /*
+   /**
     * Method to detect the mouse button is no longer held down. Frees up the drag variables and invokes {@link #resetRender()}.
     * @author Liz Matthews
     * @param e Mouse event that occured
@@ -182,8 +198,17 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       posEnd.setLocation(e.getX(), e.getY());
       updateRectangle();
       
-      // Resize the viewing area here
+      // Resize the viewing area here, check if rectangle is too small first
+      if(drawRect.getWidth() < 0.1)
+    	  System.out.println("Too small");
+      else {
+      calc.updateDisplay(drawRect.getX(), drawRect.getX()+drawRect.getWidth(),
+    		  drawRect.getY(), drawRect.getY()+drawRect.getHeight(), width, height);
       
+      //for display
+      Mandelbrot.appFrame.positionDisplay.setText(("Ranges:\t     x: [" + calc.getXMIN() + "," + calc.getXMAX()  + " ]"
+       		+ "    y: [" + calc.getYMIN() + ", " + calc.getYMAX() + " ]"));
+      }
       // Free up the draw variables
       drawRect = null;
       posStart = null;
@@ -230,9 +255,17 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       int left = (int)Math.min(posStart.getX(), posEnd.getX());
       int top = (int)Math.min(posStart.getY(), posEnd.getY());
       
-      // Calculate Y-value based on x and ratio
+      // Calculate Y-value based on x and ratio, check if Mandelbrot/Julia for rectangle dimensions
+      if(currentSet.equals("Mandelbrot Set"))
+      {
       distX = Math.abs(width);
       distY = (int)(distX * (2 / 3.5)); 
+      }
+      else
+      {
+    	  distX = Math.abs(width);
+          distY = distX;   
+      }
       
       // Set up rectangle to the correct four corners
       drawRect.setLocation(left, top);
@@ -251,7 +284,23 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * 
     */   
    public void resetRender() {
-      
+	   //check if switched to Julia and vice versa
+	   if(!switched && currentSet.equals("Julia Set"))
+		   switchToJulia();
+       if(switched && currentSet.equals("Mandelbrot Set"))
+       	   switchBackToMandelbrot();
+       
+       //update gradient to new limit
+       gradient = new RainbowGradient(limit);
+       
+       //switch gradient to new gradient type
+       if(currentGradient.equals("Rainbow Gradient"))
+    	   gradient.switchToRainbow();
+       else if(currentGradient.equals("Greenscale Gradient"))
+    	   gradient.switchToGreenscale();
+       else if(currentGradient.equals("Greyscale Gradient"))
+    	   gradient.switchToGreyscale();
+       
       // Start the rendering over again, set current x,y render chunk to 0      
       renderX = 0;
       renderY = 0;
@@ -304,22 +353,35 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
       // Variables
       Color color;
-      
+      List<Color> g = gradient.getColors();
+      int val;
       // If we're not done with the entire image...
       if (!doneRendering) {
-         
          // Iterate over each pixel in the render chunk
          for(int x = renderX; x < renderX + chunkSize; x++) {
              for(int y = renderY; y < renderY + chunkSize; y++) {
-               int val = SetCalculator.defaultDisplay(x, y, 32, height, width);
-               
             	 
-               
+            	 if(currentSet.equals("Mandelbrot Set"))
+            		  val = calc.defaultDisplay(x, y, limit, height, width);
+            	 else 
+            		  val = calc.juliaDisplay(x, y, limit, height, width);
+            	 
+            	 
                // Set the pixel in the image to the appropriate color
-           	if(val == 32)
-               		image.setRGB(x, y, Color.BLACK.getRGB());
-           	else
-           		image.setRGB(x,  y, Color.white.getRGB());
+            	if(currentGradient.equals("Original Gradient"))
+            	{
+            		if(val == limit)
+            			image.setRGB(x, y, Color.black.getRGB());
+            		else
+            			image.setRGB(x,  y, Color.white.getRGB());
+            	}
+            	else
+            	{
+            		color = g.get(val);
+            		image.setRGB(x, y, color.getRGB());
+            	}
+            	
+             
              }
          }
          
@@ -339,9 +401,24 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
          }
       }
       
+         
+      
       // Paint NOW to force the chunk visualization
       paintImmediately(0, 0, width, height);
       
+   }
+
+   //Switches setCalculator to mins/maxes pertaining to Julia Set, and switches boolean to true as a check
+   public void switchToJulia()
+   {
+	   switched = true;
+	   calc = new SetCalculator(-1.5, 1.5, -1.5, 1.5);
+   }
+ //Switches setCalculator to mins/maxes pertaining to Mandelbrot Set, and switches boolean to false as a check
+   public void switchBackToMandelbrot()
+   {
+	   switched = false;
+	   calc = new SetCalculator(-2.5, 1.0, -1.0, 1.0);
    }
    
 }
@@ -349,7 +426,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 class RainbowGradient {
 	
 	// Defines the list of seed colors
-	private Color[] test = new Color[] {Color.RED, Color.ORANGE};
+	private Color[] test = new Color[] {Color.RED, Color.GREEN, Color.BLUE};
 	
 	private Color[] greyscale = new Color[] {Color.BLACK, Color.WHITE};
 	
@@ -358,9 +435,13 @@ class RainbowGradient {
 	private Color[] rainbow = new Color[] {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
 	
 	// Defines the list of all gradients 
-	List<Color> colors = new ArrayList<Color>();
+	private List<Color> colors = new ArrayList<Color>();
 	
 	private int n;
+	
+	private Color[] current = null;
+	
+	
 	
 	   // The singleton instance variable
 	   private static RainbowGradient instance;
@@ -376,30 +457,96 @@ class RainbowGradient {
 
 	// Constructor 
 	   
-	private RainbowGradient(double n) {
+	public RainbowGradient(int n) {
 		this.n = n;
 		
+		this.current = rainbow;
+		
+		colorGradientMaker();
 	}
 	
 	
+	// Methods that set the value of current
 	
-	private void ColorGradientMaker() {
+	public void switchToGreyscale()
+	{
+		colors.clear();
+		current = greyscale;
+		colorGradientMaker();
+	}
+	public void switchToGreenscale()
+	{
+		colors.clear();
+		current = greenscale;
+		colorGradientMaker();
+	}
+	public void switchToRainbow()
+	{
+		colors.clear();
+		current = rainbow;
+		colorGradientMaker();
+	}
+	
+	//Method that updates the limit and then runs the colorGradientMaker method to update it in there too
+	
+	public void stateOfLimit(int limit) {
+		this.n = limit;
 		
-		private final s = test.length();
+		colorGradientMaker();
+	  }
+	
+	public void colorGradientMaker() {
+		
+		double numColors = (n-1);
+		double shadesPerColor = (numColors/(current.length-1));
+		int max = 255;
+		int min = 0;
 				
 		// keep appending items for each seed color
 		// n is the number of gradient colors, test is the number of seed colors
-		for (int n = 0; n < this.n - 1; n++) {
-			colors.add(null);
+		
+		for (int i = 0; i < n; i++) {
+
+			int shade = (int) (i/shadesPerColor);	
+			int iModded = (i % ((int) shadesPerColor));
+			double dist = (iModded/shadesPerColor);
+			double red1 = current[shade].getRed();
+			double green1 = current[shade].getGreen();
+			double blue1 = current[shade].getBlue();
+			double red2 = current[(Math.min(shade + 1,current.length-1))].getRed();
+			double green2 = current[(Math.min(shade + 1,current.length-1))].getGreen();
+			double blue2 = current[(Math.min(shade + 1,current.length-1))].getBlue();
+			double redDiff = red2 - red1;
+			double greenDiff = green2 - green1;
+			double blueDiff = blue2 - blue1;
+
+			
+			red1 = Math.min(Math.max(red1 + (redDiff * dist),  min), max);
+			
+
+
+			green1 = Math.min(Math.max(green1 + (greenDiff * dist), min), max);
+
+
+
+			blue1 = Math.min(Math.max(blue1 + (blueDiff * dist), min), max);
+			
+			current[shade] = new Color((int) red1, (int) green1, (int) blue1);			
+			colors.add(current[shade]);
+			//System.out.print(current[shade]);
 		}
 		
-		
-		
-		
+
+	}
+	//retrieves the colors
+	public List<Color> getColors()
+	{
+		return colors;
 	}
 	
 	
-	
 }
+	
+
 
 
