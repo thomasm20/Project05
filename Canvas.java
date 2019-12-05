@@ -12,12 +12,16 @@ import java.util.ArrayList;
 
 
 /**
- * Draws the pixels stored in the BufferedImage variable image in chunks.
+ * A <code>Canvas</code> class that draws the pixels stored in the BufferedImage variable image in chunks.
  * Yields thread control for visual updates between chunks.
  * Selects a 3.5:2 rectangle when clicked on, or 1:1 depending on the set
  * 
- * @author Liz Matthews
- * 
+ * @author Joseph Salerno
+ * @author Brendan Olski
+ * @author Mitchell Thomas
+ *
+ * Class: Canvas.java
+ * Project: 5
  */
 public class Canvas extends JPanel implements MouseListener, MouseMotionListener {
    
@@ -46,8 +50,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
    /**
     * Default constructor for the canvas. Sets the scale to 1.
-    * @author Liz Matthews
-    * 
     */   
    public Canvas() {
       super();
@@ -61,16 +63,12 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       setupCanvas();
       
       // Start the first render
-      resetRender();
-      
-      
+      resetRender(); 
    }
    
    /**
     * Scaled constructor for the canvas. Sets the scale to the parameter passed in.
-    * @author Liz Matthews
-    * @param scale   how much to scale up the canvas from the default size of 350 by 200
-    * 
+    * @param scale - how much to scale up the canvas from the default size of 350 by 200
     */   
    public Canvas(double scale) {
       super();
@@ -90,7 +88,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
    /**
     * Method to set up certain variables. Kept separate from the constructor so that setupCanvas and resetRender can be used elsewhere.
-    * @author Liz Matthews
     * 
     */
    private void setup() {
@@ -116,7 +113,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
    /**
     * Method to create the images for the canvas
-    * @author Liz Matthews
     * 
     */
    public void setupCanvas() {
@@ -134,8 +130,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
    /**
     * Overridden paintComponent to draw the BufferedImage variable to the panel
-    * @author Liz Matthews
-    * @param g Graphics variable linked to this panel
+    * @param g - Graphics variable linked to this panel
     * 
     */
    @Override
@@ -174,8 +169,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
    /**
     * Method to detect click on the canvas. Sets up a position start and end and invokes {@link #updateRectangle()} to update the drag rectangle dimensions.
-    * @author Liz Matthews
-    * @param e Mouse event that occured
+    * @param e - Mouse event that occured
     * 
     */
    @Override
@@ -189,8 +183,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 
    /**
     * Method to detect the mouse button is no longer held down. Frees up the drag variables and invokes {@link #resetRender()}.
-    * @author Liz Matthews
-    * @param e Mouse event that occured
+    * @param e - Mouse event that occured
     * 
     */
    @Override
@@ -222,10 +215,9 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
          
    }
    
-   /*
+   /**
     * Method to detect mouse movement on the canvas. Invokes {@link #updateRectangle()}.
-    * @author Liz Matthews
-    * @param e Mouse event that occured
+    * @param e - Mouse event that occured
     * 
     */   
    @Override
@@ -237,9 +229,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
 
    
-   /*
+   /**
     * Method which updates the drag rectangle. Maintains a ratio of 3.5:2.
-    * @author Liz Matthews
     * 
     */
    public void updateRectangle() {
@@ -278,9 +269,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       repaint();
    }
    
-   /*
+   /**
     * Method which resets the chunk rendering. Clears out the canvas with black before invoking {@link #renderAll()}.
-    * @author Liz Matthews
     * 
     */   
    public void resetRender() {
@@ -318,9 +308,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 
    }
    
-   /*
+   /**
     * Method which renders chunks of an image at a time. Yields control of the thread for visualization of each chunk.
-    * @author Liz Matthews
     * 
     */
    public void renderAll() {
@@ -344,9 +333,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     
    }
    
-   /*
+   /**
     * Renders the next chunk.
-    * @author Liz Matthews
     * 
     */   
    private void render() {
@@ -408,13 +396,21 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
    }
 
-   //Switches setCalculator to mins/maxes pertaining to Julia Set, and switches boolean to true as a check
+   
+   /**
+    * Switches setCalculator to mins/maxes pertaining to Julia Set, and switches boolean to true as a check
+    *
+    */
    public void switchToJulia()
    {
 	   switched = true;
 	   calc = new SetCalculator(-1.5, 1.5, -1.5, 1.5);
    }
- //Switches setCalculator to mins/maxes pertaining to Mandelbrot Set, and switches boolean to false as a check
+ 
+   /**
+    * Switches setCalculator to mins/maxes pertaining to Mandelbrot Set, and switches boolean to false as a check
+    *
+    */
    public void switchBackToMandelbrot()
    {
 	   switched = false;
@@ -423,6 +419,16 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
 }
 
+/**
+ * A <code>RainbowGradient</code> class that 
+ * 
+ * @author Joseph Salerno
+ * @author Brendan Olski
+ * @author Mitchell Thomas
+ *
+ * Class: RainbowGradient.java
+ * Project: 5
+ */
 class RainbowGradient {
 	
 	// Defines the list of seed colors
@@ -443,19 +449,26 @@ class RainbowGradient {
 	
 	
 	
-	   // The singleton instance variable
-	   private static RainbowGradient instance;
-	   
-	   public static RainbowGradient getInstance() {
-	      if (instance == null) {
-	         instance = new RainbowGradient(32);
-	      }
-	      
-	      return instance;
+	// The singleton instance variable
+	private static RainbowGradient instance;
+	
+       /**
+        * Create or get an instance of RainbowGradient.
+        * @return an instance of RainbowGradient
+        */
+	public static RainbowGradient getInstance() {
+	   if (instance == null) {
+	      instance = new RainbowGradient(32);
 	   }
+	      
+	   return instance;
+	}
 
 
-	// Constructor 
+       /**
+    	* Constructor method for RainbowGradient class
+    	* @param n - int variable for the number of gradient colors
+   	*/
 	   
 	public RainbowGradient(int n) {
 		this.n = n;
@@ -465,21 +478,32 @@ class RainbowGradient {
 		colorGradientMaker();
 	}
 	
-	
-	// Methods that set the value of current
-	
+       /**
+    	* Method that set the value of current to greyscale
+    	*
+   	*/
 	public void switchToGreyscale()
 	{
 		colors.clear();
 		current = greyscale;
 		colorGradientMaker();
 	}
+	
+       /**
+    	* Method that set the value of current to greenscale
+    	*
+   	*/
 	public void switchToGreenscale()
 	{
 		colors.clear();
 		current = greenscale;
 		colorGradientMaker();
 	}
+	
+       /**
+    	* Method that set the value of current to rainbow
+    	*
+   	*/
 	public void switchToRainbow()
 	{
 		colors.clear();
@@ -487,14 +511,21 @@ class RainbowGradient {
 		colorGradientMaker();
 	}
 	
-	//Method that updates the limit and then runs the colorGradientMaker method to update it in there too
-	
+       /**
+    	* Method that updates the limit and then runs the colorGradientMaker method to update it in there too
+    	* @param limit - int variable that 
+	*
+   	*/
 	public void stateOfLimit(int limit) {
 		this.n = limit;
 		
 		colorGradientMaker();
 	  }
 	
+       /**
+    	* Method that 
+    	*
+   	*/
 	public void colorGradientMaker() {
 		
 		double numColors = (n-1);
@@ -538,7 +569,11 @@ class RainbowGradient {
 		
 
 	}
-	//retrieves the colors
+	
+	/**
+    	* Method that retrieves the colors
+    	* @return the colors
+   	*/
 	public List<Color> getColors()
 	{
 		return colors;
