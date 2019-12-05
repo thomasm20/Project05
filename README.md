@@ -52,28 +52,32 @@ updateRectangle() - Method which updates the drag rectangle. Maintains a ratio o
 resetRender() - Method which resets the chunk rendering. Clears out the canvas with black before invoking {@link #renderAll()}
 renderAll() - Method which renders chunks of an image at a time. Yields control of the thread for visualization of each chunk
 render() - Renders the next chunk
-switchtoJulia() - 
+switchtoJulia() - Switches setCalculator to mins/maxes pertaining to Julia set and switches boolean to true as a check
+switchBackToMandelbrot() - Switches setCalculator to mins/maxes pertaining to Mandelbrot set and switches boolean to false as a check
 
 ===RainbowGradient===
-RainbowGradient is a class that 
+RainbowGradient is a singleton class that returns a color based on the integer given to it, which is between 0 and limit-1. It works to add color to the Mandelbrot/Julia set.
 
 --Variables--
-test:
-greyscale:
-greenscale:
-rainbow:
+test: private...
+greyscale: private...
+greenscale: private...
+rainbow: private...
 colors: private list of Color objects that defines the list of all color gradients
-n:
-current:
+n: private int variable that represents the number of gradient colors
+current: private...
 instance: the private static singleton instance variable of type RainbowGradient
 
 --Methods--
 getInstance() - 
-RainbowGradient(int n) - Constructor
+RainbowGradient(int n) - Constructor method for RainbowGradient class
 stateOfCurrent(String state) - 
-stateOfLimit(int limit) - 
+stateOfLimit(int limit) - Method that updates the limit and then runs the colorGradientMaker method to update it in there too
 colorGradientMaker() - 
-getColors() - 
+getColors() - method to retrieve the colors
+switchToGreyscale() - method that sets the value of current to grey
+switchToGreenscale() - method that sets the value of current to green
+switchToRainbow() - method that sets the value of current to rainbow
 
 ===Complex===
 Complex.java contains a Complex class that
@@ -125,9 +129,9 @@ combo: public JComboBox
 appFrame: public static Mandelbrot 
 
 --Methods--
-Mandelbrot() - Constructor method 
-main(String[] args) - 
-actionPerformed(ActionEvent e) - 
+Mandelbrot() - Constructor method for Mandelbrot class
+main(String[] args) - main method to create the main frame and show the window
+actionPerformed(ActionEvent e) - method to implement action commands on buttons and in the frame
 
 ===SetCalculator===
 SetCalculator.java contains a SetCalculator class that 
@@ -139,11 +143,11 @@ yMin: private static double
 yMax: private static double 
 
 --Methods--
-SetCalculator(double xMin, double xMax, double yMin, double yMax) - Constructor method
+SetCalculator(double xMin, double xMax, double yMin, double yMax) - Constructor method for SetCalculator class
 defaultDisplay(int x, int y, int limit, int h, int w) - 
 juliaDisplay(int x, int y, int limit, int h, int w) - 
 updateDisplay(double xMi, double xMa, double yMi, double yMa, double width, double height) - 
-getXMIN() - 
-getXMAX() - 
-getYMIN() - 
-getYMAX() - 
+getXMIN() - method that returns xMin for display on the canvas 
+getXMAX() - method that returns xMax for display on the canvas 
+getYMIN() - method that returns yMin for display on the canvas 
+getYMAX() - method that returns yMax for display on the canvas 
