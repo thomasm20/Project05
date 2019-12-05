@@ -353,6 +353,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
       // Variables
       Color color;
+      List<Color> g = gradient.getColors();
       int val;
       // If we're not done with the entire image...
       if (!doneRendering) {
@@ -361,16 +362,12 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
              for(int y = renderY; y < renderY + chunkSize; y++) {
             	 
             	 if(currentSet.equals("Mandelbrot Set"))
-            	 {
             		  val = calc.defaultDisplay(x, y, limit, height, width);
-            	 }
-            	 
-            	 else {
+            	 else 
             		  val = calc.juliaDisplay(x, y, limit, height, width);
-            	 }
+            	 
             	 
                // Set the pixel in the image to the appropriate color
-            	 //ORIGINAL
             	if(currentGradient.equals("Original Gradient"))
             	{
             		if(val == limit)
@@ -380,10 +377,11 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
             	}
             	else
             	{
-            		color = gradient.getColors().get(val);
+            		color = g.get(val);
             		image.setRGB(x, y, color.getRGB());
-            }
+            	}
             	
+             
              }
          }
          
@@ -403,10 +401,13 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
          }
       }
       
+         
+      
       // Paint NOW to force the chunk visualization
       paintImmediately(0, 0, width, height);
       
    }
+
    //Switches setCalculator to mins/maxes pertaining to Julia Set, and switches boolean to true as a check
    public void switchToJulia()
    {
@@ -465,7 +466,7 @@ class RainbowGradient {
 	}
 	
 	
-	// Method that sets the value of current
+	// Methods that set the value of current
 	
 	public void switchToGreyscale()
 	{
@@ -483,26 +484,6 @@ class RainbowGradient {
 	{
 		colors.clear();
 		current = rainbow;
-		colorGradientMaker();
-	}
-	public void stateOfCurrent(String state) {
-		if (state == "Rainbow") {
-			this.current = rainbow;
-		}
-		
-		if (state == "Test") {
-			this.current = test;
-		}
-		
-		if (state == "Greyscale") {
-			this.current = greyscale;
-		}
-		
-		if (state == "Greenscale") {
-			this.current = greenscale;
-		}
-		
-		
 		colorGradientMaker();
 	}
 	
@@ -557,6 +538,7 @@ class RainbowGradient {
 		
 
 	}
+	//retrieves the colors
 	public List<Color> getColors()
 	{
 		return colors;

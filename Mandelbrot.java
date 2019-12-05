@@ -207,17 +207,8 @@ public class Mandelbrot extends JFrame implements ActionListener{
 		}
 		else if(e.getActionCommand().equals("gradientChanged"))
 		{
-			//update currentGradient in canvas
-			if(((String)gradientBox.getSelectedItem()).equals("Original Gradient"))
-				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
-			else if(((String)gradientBox.getSelectedItem()).equals("Rainbow Gradient"))
-				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
-			else if(((String)gradientBox.getSelectedItem()).equals("Greyscale Gradient"))
-				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
-			else				
-				this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
-			
-			
+			//update currentGradient in canvas				
+			this.canvas.currentGradient = (String)gradientBox.getSelectedItem();
 			this.canvas.resetRender();
 			
 		}
