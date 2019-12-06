@@ -34,7 +34,7 @@
 import java.util.Objects;
 
 /**
- * A <code>Complex</code> class that .
+ * A <code>Complex</code> class that creates mathematical function methods.
  *
  * @author Joseph Salerno
  * @author Brendan Olski
