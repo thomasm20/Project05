@@ -1,5 +1,17 @@
 import java.awt.Point;
 
+/**
+ * A <code>SetCalculator</code> class that creates
+ * 
+ *
+ * @author JosephSalerno
+ * @author BrendanOlski
+ * @author MitchellThomas
+ *
+ * Class: SetCalculator.java
+ * Project: 5
+ */
+
 public class SetCalculator {
 	
 	private static double xMin;
@@ -7,7 +19,13 @@ public class SetCalculator {
 	private static double yMin;
 	private static double yMax;
 	
-	//constructor
+	/**
+	 * Constructor method
+	 * @param xMin - 
+	 * @param xMax - 
+	 * @param yMin - 
+	 * @param yMax - 
+	 */
 	public SetCalculator(double xMin, double xMax, double yMin, double yMax)
 	{
 		this.xMin = xMin;
@@ -16,6 +34,16 @@ public class SetCalculator {
 		this.yMax = yMax;
 	}
 	
+	/**
+	 * 
+	 *
+	 * @param x - 
+	 * @param y - 
+	 * @param limit - 
+	 * @param h - 
+	 * @param w - 
+	 * @return limit
+	 */
 	public static int defaultDisplay(int x, int y, int limit, int h, int w)
 	{
 		int counter = 0;
@@ -33,6 +61,16 @@ public class SetCalculator {
 			return limit;
 	}
 	
+	/**
+	 * 
+	 *
+	 * @param x - 
+	 * @param y - 
+	 * @param limit - 
+	 * @param h - 
+	 * @param w - 
+	 * @return limit
+	 */
 	public static int juliaDisplay(int x, int y, int limit, int h, int w)
 	{
 		int counter = 0;
@@ -49,6 +87,18 @@ public class SetCalculator {
 			
 			return limit;
 	}
+	
+	/**
+	 * 
+	 *
+	 * @param xMi - 
+	 * @param xMa - 
+	 * @param yMi - 
+	 * @param yMa - 
+	 * @param width - 
+	 * @param height - 
+	 * @return
+	 */
 	public void updateDisplay(double xMi, double xMa, double yMi, double yMa, double width, double height) {
 		
 		Complex topLeft = new Complex(((xMi/((double)width)) * (xMax-(xMin)))+(xMin), ((yMi/((double)height)) * (yMax-(yMin)))+(yMin));
@@ -56,31 +106,38 @@ public class SetCalculator {
 		xMin = topLeft.re();
 		yMax = bottomRight.im();
 		xMax = bottomRight.re();
-		yMin = topLeft.im();
-		
-		
+		yMin = topLeft.im();	
 	}
 	
-	//returns xMin for display on the canvas
-	public double getXMIN()
-	{
+	/**
+	 * Returns xMin for display of the canvas
+	 * @return xMin
+	 */
+	public double getXMIN() {
 		return xMin - (xMin % 0.01);
 	}
 	
-	//returns xMax for display on the canvas
-	public double getXMAX()
-	{
+	/**
+	 * Returns xMax for display on the canvas
+	 * @return xMax
+	 */
+	public double getXMAX() {
 		return xMax - (xMax % 0.01);
 	}
 	
-	//returns yMin for display on the canvas
-	public double getYMIN()
-	{
+	/**
+	 * Returns yMin for display on the canvas
+	 * @return yMin
+	 */
+	public double getYMIN() {
 		return yMin - (yMin % 0.01);
 	}
-	//returns yMax for display on the canvas
-	public double getYMAX()
-	{
+	
+	/**
+	 * Returns yMax for display on the canvas
+	 * @return yMax
+	 */	
+	public double getYMAX() {
 		return yMax - (yMax % 0.01);
 	}
 }
