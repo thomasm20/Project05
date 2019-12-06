@@ -72,7 +72,7 @@ switchToGreenscale() - method that sets the value of current to green
 switchToRainbow() - method that sets the value of current to rainbow
 
 ===Complex===
-Complex.java contains a Complex class that
+Complex.java contains a Complex class that creates mathematical function methods.
 
 --Variables--
 re: private final double variable that represents the real part
@@ -98,8 +98,8 @@ cos() - return a new Complex object whose value is the complex cosine of this
 tan() - return a new Complex object whose value is the complex tangent of this
 plus(Complex a, Complex b) - a static version of plus
 
-equals(Object x) - 
-hashCode() - 
+equals(Object x) - return true/false if equal to Object x
+hashCode() - returns the integer hash code value of the object
 
 main(String[] args) - sample client for testing
 
