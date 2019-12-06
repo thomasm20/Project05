@@ -5,6 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A <code>Mandelbrot</code> class that 
+ * 
+ * @author JosephSalerno
+ * @author BrendanOlski
+ * @author MitchellThomas
+ *
+ * Class: Madelbrot.java
+ * Project: 5
+ */
+
 public class Mandelbrot extends JFrame implements ActionListener{
     
     // Class Variables   
@@ -22,7 +33,10 @@ public class Mandelbrot extends JFrame implements ActionListener{
     public JLabel positionDisplay;
     private JComboBox gradientBox;
     
-   
+   /**
+    * 
+    * 
+    */
     public Mandelbrot(){
         
         // Use a GridBagLayout
@@ -144,6 +158,10 @@ public class Mandelbrot extends JFrame implements ActionListener{
          
     }
     
+   /**
+    * Main method to create Mandelbrot main frame and show window
+    * 
+    */
     public static void main(String[] args) {
         
         // Main frame
@@ -153,7 +171,10 @@ public class Mandelbrot extends JFrame implements ActionListener{
         appFrame.setVisible(true);
         
     }
-
+       /**
+   	* 
+    	* 
+    	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// INCREASE LIMIT BUTTON
