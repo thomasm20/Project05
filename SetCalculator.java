@@ -1,8 +1,8 @@
 import java.awt.Point;
 
 /**
- * A <code>SetCalculator</code> class that creates
- * 
+ * A <code>SetCalculator</code> class that calculates the 
+ * Mandelbrot and Julia display to be input in the frame.
  *
  * @author JosephSalerno
  * @author BrendanOlski
@@ -20,11 +20,11 @@ public class SetCalculator {
 	private static double yMax;
 	
 	/**
-	 * Constructor method
-	 * @param xMin - 
-	 * @param xMax - 
-	 * @param yMin - 
-	 * @param yMax - 
+	 * Constructor method for SetCalculator class
+	 * @param xMin - minimum x value
+	 * @param xMax - maximum x value
+	 * @param yMin - minimum y value
+	 * @param yMax - maximum y value
 	 */
 	public SetCalculator(double xMin, double xMax, double yMin, double yMax)
 	{
@@ -35,7 +35,7 @@ public class SetCalculator {
 	}
 	
 	/**
-	 * 
+	 * Method that calculates the default display for the Mandelbrot
 	 *
 	 * @param x - 
 	 * @param y - 
@@ -62,7 +62,7 @@ public class SetCalculator {
 	}
 	
 	/**
-	 * 
+	 * Method that calcualtes the Julia display
 	 *
 	 * @param x - 
 	 * @param y - 
@@ -89,7 +89,7 @@ public class SetCalculator {
 	}
 	
 	/**
-	 * 
+	 * Method that calcualtes any updates to the display
 	 *
 	 * @param xMi - 
 	 * @param xMa - 
