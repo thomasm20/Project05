@@ -1,17 +1,9 @@
 # Project05
-Project with the purpose of 
+Project with the purpose of displaying the Mandelbrot Set in an interactive GUI, allowing zooming and color changing by the user.
 
 Project 5
 CS 209 Fall 2019
 By Mitchell Thomas, Joe Salerno, and Brendan Olski
-
-===Features===
---Selection of shapes--
-Describe how you programmed the Mandelbrot set dispaly in a general sense, include descriptions of any patterns you used.
---Dragged shape preview--
-etc
---Other features--
-etc etc
 
 ===Canvas===
 Canvas.java contains a Canvas class that draws the pixels stored in the BufferedImage variable image in chunks and yields thread control for visual updates between chunks.
@@ -69,11 +61,11 @@ current: private...
 instance: the private static singleton instance variable of type RainbowGradient
 
 --Methods--
-getInstance() - 
+getInstance() - Method that creates or gets an instance of RainbowGradient and establishes a default limit value.
 RainbowGradient(int n) - Constructor method for RainbowGradient class
 stateOfCurrent(String state) - 
 stateOfLimit(int limit) - Method that updates the limit and then runs the colorGradientMaker method to update it in there too
-colorGradientMaker() - 
+colorGradientMaker() - Method that sets the RGB values for the color in the adjacent index of the gradient given the values of the previous index and the distance away from the next seed color.
 getColors() - method to retrieve the colors
 switchToGreyscale() - method that sets the value of current to grey
 switchToGreenscale() - method that sets the value of current to green
@@ -112,7 +104,7 @@ hashCode() -
 main(String[] args) - sample client for testing
 
 ===Mandelbrot===
-Mandelbrot.java contains a Mandelbrot class that extends JFrame and implements ActionListener to ...
+Mandelbrot.java contains a Mandelbrot class that extends JFrame and implements ActionListener to set up the Mandelbrot interactive GUI frame with buttons and other items that respond to actions by the user.
 
 --Variables--
 canvas: private Canvas 
@@ -134,7 +126,7 @@ main(String[] args) - main method to create the main frame and show the window
 actionPerformed(ActionEvent e) - method to implement action commands on buttons and in the frame
 
 ===SetCalculator===
-SetCalculator.java contains a SetCalculator class that 
+SetCalculator.java contains a SetCalculator class that calculates the Mandelbrot and Julia display to be input in the frame.
 
 --Variables--
 xMin: private static double 
@@ -144,9 +136,9 @@ yMax: private static double
 
 --Methods--
 SetCalculator(double xMin, double xMax, double yMin, double yMax) - Constructor method for SetCalculator class
-defaultDisplay(int x, int y, int limit, int h, int w) - 
-juliaDisplay(int x, int y, int limit, int h, int w) - 
-updateDisplay(double xMi, double xMa, double yMi, double yMa, double width, double height) - 
+defaultDisplay(int x, int y, int limit, int h, int w) - Method that calculates the default display for the Mandelbrot
+juliaDisplay(int x, int y, int limit, int h, int w) - Method that calcualtes the Julia display
+updateDisplay(double xMi, double xMa, double yMi, double yMa, double width, double height) - Method that calcualtes any updates to the display
 getXMIN() - method that returns xMin for display on the canvas 
 getXMAX() - method that returns xMax for display on the canvas 
 getYMIN() - method that returns yMin for display on the canvas 
