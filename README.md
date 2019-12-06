@@ -51,19 +51,17 @@ switchBackToMandelbrot() - Switches setCalculator to mins/maxes pertaining to Ma
 RainbowGradient is a singleton class that returns a color based on the integer given to it, which is between 0 and limit-1. It works to add color to the Mandelbrot/Julia set.
 
 --Variables--
-test: private...
-greyscale: private...
-greenscale: private...
-rainbow: private...
+greyscale: private list variable for the list of seed colors for greyscale gradient
+greenscale: private list variable for the list of seed colors for greenscale gradient
+rainbow: private list variable for the list of seed colors for rainbow gradient
 colors: private list of Color objects that defines the list of all color gradients
 n: private int variable that represents the number of gradient colors
-current: private...
+current: private list variable for the list of seed colors for current gradient selected
 instance: the private static singleton instance variable of type RainbowGradient
 
 --Methods--
 getInstance() - Method that creates or gets an instance of RainbowGradient and establishes a default limit value.
-RainbowGradient(int n) - Constructor method for RainbowGradient class
-stateOfCurrent(String state) - 
+RainbowGradient(int n) - Constructor method for RainbowGradient class 
 stateOfLimit(int limit) - Method that updates the limit and then runs the colorGradientMaker method to update it in there too
 colorGradientMaker() - Method that sets the RGB values for the color in the adjacent index of the gradient given the values of the previous index and the distance away from the next seed color.
 getColors() - method to retrieve the colors
@@ -107,18 +105,19 @@ main(String[] args) - sample client for testing
 Mandelbrot.java contains a Mandelbrot class that extends JFrame and implements ActionListener to set up the Mandelbrot interactive GUI frame with buttons and other items that respond to actions by the user.
 
 --Variables--
-canvas: private Canvas 
-increaseButton: private JButton 
-decreaseButton: private JButton 
-resetButton: private JButton  
-saveImaButton: private JButton 
-savePosButton: private JButton 
-loadButton: private JButton 
-editButton: private JButton 
+canvas: private variable of type Canvas 
+increaseButton: private JButton variable for the increase limit button in the main frame
+decreaseButton: private JButton variable for the decrease limit button in the main frame
+resetButton: private JButton variable for the reset button in the main frame
+saveImaButton: private JButton variable for the save image button in the main frame
+savePosButton: private JButton variable for the save position button in the main frame
+loadButton: private JButton variable for the load button in the main frame
+editButton: private JButton variable for the edit button in the main frame
+gradientBox: private JComboBox variable for the combo box/dropdown menu of different gradient colors
 
-positionDisplay: public JLabel 
-combo: public JComboBox 
-appFrame: public static Mandelbrot 
+positionDisplay: public JLabel variable
+combo: public JComboBox variable for the combo box/dropdown menu with Mandelbrot set and Julia set
+appFrame: public static Mandelbrot variable for the main frame
 
 --Methods--
 Mandelbrot() - Constructor method for Mandelbrot class
@@ -129,10 +128,10 @@ actionPerformed(ActionEvent e) - method to implement action commands on buttons 
 SetCalculator.java contains a SetCalculator class that calculates the Mandelbrot and Julia display to be input in the frame.
 
 --Variables--
-xMin: private static double 
-xMax: private static double 
-yMin: private static double 
-yMax: private static double 
+xMin: private static double variable for the minimum x coordinate
+xMax: private static double variable for the maximum x coordinate
+yMin: private static double variable for the minimum y coordinate
+yMax: private static double variable for the maximum y coordinate
 
 --Methods--
 SetCalculator(double xMin, double xMax, double yMin, double yMax) - Constructor method for SetCalculator class
