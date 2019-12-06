@@ -227,8 +227,8 @@ public class Complex {
     }
 
     /**
-     * Method that returns 
-     * @return 
+     * Method that returns true/false if equal to Object x
+     * @return true/false if equal to Object x
      *
      */
     public boolean equals(Object x) {
@@ -239,8 +239,8 @@ public class Complex {
     }
 
     /**
-     * Method that returns 
-     * @return 
+     * Method that returns the integer hash code value of the object 
+     * @return the integer hash code value of the object
      *
      */
     public int hashCode() {
