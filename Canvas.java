@@ -450,9 +450,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 
 class RainbowGradient {
 	
-	// Defines the list of seed colors
-	private Color[] test = new Color[] {Color.RED, Color.GREEN, Color.BLUE};
-	
+	// Defines the list of seed colors	
 	private Color[] greyscale = new Color[] {Color.BLACK, Color.WHITE};
 	
 	private Color[] greenscale = new Color[] {Color.BLACK, Color.GREEN};
