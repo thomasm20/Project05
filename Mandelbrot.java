@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * A <code>Mandelbrot</code> class that 
+ * A <code>Mandelbrot</code> class that sets up the Mandelbrot interactive 
+ * GUI frame with buttons and other items that respond to actions by the user.
  * 
  * @author JosephSalerno
  * @author BrendanOlski
@@ -168,9 +169,9 @@ public class Mandelbrot extends JFrame implements ActionListener{
         appFrame = new Mandelbrot();                
         
         // Show window
-        appFrame.setVisible(true);
-        
+        appFrame.setVisible(true);      
     }
+	
        /**
    	* Method to implement action commands on buttons and in the frame
     	* 
