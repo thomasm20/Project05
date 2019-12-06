@@ -11,7 +11,6 @@ import java.awt.Point;
  * Class: SetCalculator.java
  * Project: 5
  */
-
 public class SetCalculator {
 	
 	private static double xMin;
