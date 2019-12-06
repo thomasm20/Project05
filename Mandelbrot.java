@@ -34,7 +34,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
     private JComboBox gradientBox;
     
    /**
-    * 
+    * Constructor method for Mandelbrot class adding buttons and items to the main frame
     * 
     */
     public Mandelbrot(){
@@ -172,7 +172,7 @@ public class Mandelbrot extends JFrame implements ActionListener{
         
     }
        /**
-   	* 
+   	* Method to implement action commands on buttons and in the frame
     	* 
     	*/
 	@Override
