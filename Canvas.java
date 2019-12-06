@@ -51,7 +51,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    /**
     * Default constructor for the canvas. Sets the scale to 1.
     */   
-	
    public Canvas() {
       super();
       
@@ -92,7 +91,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * setupCanvas and resetRender can be used elsewhere.
     * 
     */
-	
    private void setup() {
       
       // Initial state of variables
@@ -118,7 +116,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method to create the images for the canvas
     * 
     */
-	
    public void setupCanvas() {
       // Solid dimensions
       width = (int)(350 * scale);
@@ -137,7 +134,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * @param g - Graphics variable linked to this panel
     * 
     */
-	
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
@@ -153,8 +149,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       
    }
    
-   // Methods needed for mouse listeners but not needed to implement
-	
+   // Methods needed for mouse listeners but not needed to implement	
    @Override
    public void mouseEntered(MouseEvent e) {
    }
@@ -179,7 +174,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * @param e - Mouse event that occured
     * 
     */
-	
    @Override
    public void mousePressed(MouseEvent e) {
       if (e.getButton() == MouseEvent.BUTTON1) {
@@ -194,7 +188,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * @param e - Mouse event that occured
     * 
     */
-	
    @Override
    public void mouseReleased(MouseEvent e) {
       posEnd.setLocation(e.getX(), e.getY());
@@ -230,7 +223,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * @param e - Mouse event that occured
     * 
     */   
-	
    @Override
    public void mouseDragged(MouseEvent e) {
       if (drawRect != null) {
@@ -244,7 +236,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method which updates the drag rectangle. Maintains a ratio of 3.5:2.
     * 
     */
-	
    public void updateRectangle() {
       int distX, distY;
       
@@ -284,8 +275,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    /**
     * Method which resets the chunk rendering. Clears out the canvas with black before invoking {@link #renderAll()}.
     * 
-    */   
-	
+    */  	
    public void resetRender() {
        //check if switched to Julia and vice versa
        if(!switched && currentSet.equals("Julia Set"))
@@ -325,7 +315,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method which renders chunks of an image at a time. Yields control of the thread for visualization of each chunk.
     * 
     */
-	
    public void renderAll() {
       
       // Continue until the entire image is done
@@ -351,7 +340,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method that renders the next chunk.
     * 
     */ 
-	
    private void render() {
       
       // Variables
@@ -416,7 +404,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method that switches setCalculator to mins/maxes pertaining to Julia Set, and switches boolean to true as a check
     *
     */
-	
    public void switchToJulia()
    {
 	   switched = true;
@@ -427,7 +414,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method that switches setCalculator to mins/maxes pertaining to Mandelbrot Set, and switches boolean to false as a check
     *
     */
-	
    public void switchBackToMandelbrot()
    {
 	   switched = false;
@@ -447,7 +433,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
  * Class: RainbowGradient.java
  * Project: 5
  */
-
 class RainbowGradient {
 	
 	// Defines the list of seed colors	
@@ -473,7 +458,6 @@ class RainbowGradient {
         * Method that creates or gets an instance of RainbowGradient and establishes a default limit value.
         * @return an instance of RainbowGradient
         */
-	
 	public static RainbowGradient getInstance() {
 	   if (instance == null) {
 	      instance = new RainbowGradient(32);
@@ -486,8 +470,7 @@ class RainbowGradient {
        /**
     	* Constructor method for RainbowGradient class
     	* @param n - int variable for the number of gradient colors
-   	*/
-	   
+   	*/ 
 	public RainbowGradient(int n) {
 		this.n = n;
 		
@@ -500,7 +483,6 @@ class RainbowGradient {
     	* Method that sets the value of current to greyscale.
     	*
    	*/
-	
 	public void switchToGreyscale()
 	{
 		colors.clear();
@@ -523,7 +505,6 @@ class RainbowGradient {
     	* Method that sets the value of current to rainbow.
     	*
    	*/
-	
 	public void switchToRainbow()
 	{
 		colors.clear();
@@ -536,7 +517,6 @@ class RainbowGradient {
     	* @param limit - int variable that 
 	*
    	*/
-	
 	public void stateOfLimit(int limit) {
 		this.n = limit;
 		
@@ -548,7 +528,6 @@ class RainbowGradient {
 	* previous index and the distance away from the next seed color. 
     	*
    	*/
-	
 	public void colorGradientMaker() {
 		
 		double numColors = (n-1);
@@ -597,7 +576,6 @@ class RainbowGradient {
     	* Method that retrieves the full gradient of colors.
     	* @return the color gradient
    	*/
-	
 	public List<Color> getColors()
 	{
 		return colors;
