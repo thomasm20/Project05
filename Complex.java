@@ -43,7 +43,6 @@ import java.util.Objects;
  * Class: Complex.java
  * Project 5
  */
-
 public class Complex {
     private final double re;   // the real part
     private final double im;   // the imaginary part
@@ -74,7 +73,6 @@ public class Complex {
      * @return absolute value
      *
      */
-    // return abs/modulus/magnitude
     public double abs() {
         return Math.hypot(re, im);
     }
