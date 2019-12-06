@@ -21,10 +21,10 @@ public class SetCalculator {
 	
 	/**
 	 * Constructor method for SetCalculator class
-	 * @param xMin - minimum x value
-	 * @param xMax - maximum x value
-	 * @param yMin - minimum y value
-	 * @param yMax - maximum y value
+	 * @param xMin - minimum x coordinate
+	 * @param xMax - maximum x coordinate
+	 * @param yMin - minimum y coordinate
+	 * @param yMax - maximum y coordinate
 	 */
 	public SetCalculator(double xMin, double xMax, double yMin, double yMax)
 	{
@@ -37,11 +37,11 @@ public class SetCalculator {
 	/**
 	 * Method that calculates the default display for the Mandelbrot
 	 *
-	 * @param x - 
-	 * @param y - 
-	 * @param limit - 
-	 * @param h - 
-	 * @param w - 
+	 * @param x - x-coordinate
+	 * @param y - y-coordinate
+	 * @param limit - limit
+	 * @param h - height
+	 * @param w - width
 	 * @return limit
 	 */
 	public static int defaultDisplay(int x, int y, int limit, int h, int w)
@@ -64,11 +64,11 @@ public class SetCalculator {
 	/**
 	 * Method that calcualtes the Julia display
 	 *
-	 * @param x - 
-	 * @param y - 
-	 * @param limit - 
-	 * @param h - 
-	 * @param w - 
+	 * @param x - x coordinate
+	 * @param y - y coordinate
+	 * @param limit - limit
+	 * @param h - height
+	 * @param w - width
 	 * @return limit
 	 */
 	public static int juliaDisplay(int x, int y, int limit, int h, int w)
@@ -91,13 +91,12 @@ public class SetCalculator {
 	/**
 	 * Method that calcualtes any updates to the display
 	 *
-	 * @param xMi - 
-	 * @param xMa - 
-	 * @param yMi - 
-	 * @param yMa - 
-	 * @param width - 
-	 * @param height - 
-	 * @return
+	 * @param xMi - minimum x coordinate
+	 * @param xMa - maximum x coordinate
+	 * @param yMi - minimum y coordinate
+	 * @param yMa - maximum y coordinate
+	 * @param width - with
+	 * @param height - height
 	 */
 	public void updateDisplay(double xMi, double xMa, double yMi, double yMa, double width, double height) {
 		
@@ -111,7 +110,7 @@ public class SetCalculator {
 	
 	/**
 	 * Returns xMin for display of the canvas
-	 * @return xMin
+	 * @return minimum x coordinate
 	 */
 	public double getXMIN() {
 		return xMin - (xMin % 0.01);
@@ -119,7 +118,7 @@ public class SetCalculator {
 	
 	/**
 	 * Returns xMax for display on the canvas
-	 * @return xMax
+	 * @return maximum x coordinate
 	 */
 	public double getXMAX() {
 		return xMax - (xMax % 0.01);
@@ -127,7 +126,7 @@ public class SetCalculator {
 	
 	/**
 	 * Returns yMin for display on the canvas
-	 * @return yMin
+	 * @return minimum y coordinate
 	 */
 	public double getYMIN() {
 		return yMin - (yMin % 0.01);
@@ -135,7 +134,7 @@ public class SetCalculator {
 	
 	/**
 	 * Returns yMax for display on the canvas
-	 * @return yMax
+	 * @return maximum y coordinate
 	 */	
 	public double getYMAX() {
 		return yMax - (yMax % 0.01);
