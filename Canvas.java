@@ -51,6 +51,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    /**
     * Default constructor for the canvas. Sets the scale to 1.
     */   
+	
    public Canvas() {
       super();
       
@@ -87,9 +88,11 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
    
    /**
-    * Method to set up certain variables. Kept separate from the constructor so that setupCanvas and resetRender can be used elsewhere.
+    * Method to set up certain variables. Kept separate from the constructor so that 
+    * setupCanvas and resetRender can be used elsewhere.
     * 
     */
+	
    private void setup() {
       
       // Initial state of variables
@@ -115,6 +118,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method to create the images for the canvas
     * 
     */
+	
    public void setupCanvas() {
       // Solid dimensions
       width = (int)(350 * scale);
@@ -133,6 +137,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * @param g - Graphics variable linked to this panel
     * 
     */
+	
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
@@ -149,6 +154,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
    
    // Methods needed for mouse listeners but not needed to implement
+	
    @Override
    public void mouseEntered(MouseEvent e) {
    }
@@ -168,10 +174,12 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    
    
    /**
-    * Method to detect click on the canvas. Sets up a position start and end and invokes {@link #updateRectangle()} to update the drag rectangle dimensions.
+    * Method to detect click on the canvas. Sets up a position start and end and invokes {@link #updateRectangle()} 
+    * to update the drag rectangle dimensions.
     * @param e - Mouse event that occured
     * 
     */
+	
    @Override
    public void mousePressed(MouseEvent e) {
       if (e.getButton() == MouseEvent.BUTTON1) {
@@ -186,6 +194,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * @param e - Mouse event that occured
     * 
     */
+	
    @Override
    public void mouseReleased(MouseEvent e) {
       posEnd.setLocation(e.getX(), e.getY());
@@ -202,6 +211,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
       Mandelbrot.appFrame.positionDisplay.setText(("Ranges:\t     x: [" + calc.getXMIN() + "," + calc.getXMAX()  + " ]"
        		+ "    y: [" + calc.getYMIN() + ", " + calc.getYMAX() + " ]"));
       }
+	   
       // Free up the draw variables
       drawRect = null;
       posStart = null;
@@ -220,6 +230,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * @param e - Mouse event that occured
     * 
     */   
+	
    @Override
    public void mouseDragged(MouseEvent e) {
       if (drawRect != null) {
@@ -233,6 +244,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method which updates the drag rectangle. Maintains a ratio of 3.5:2.
     * 
     */
+	
    public void updateRectangle() {
       int distX, distY;
       
@@ -273,10 +285,11 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method which resets the chunk rendering. Clears out the canvas with black before invoking {@link #renderAll()}.
     * 
     */   
+	
    public void resetRender() {
-	   //check if switched to Julia and vice versa
-	   if(!switched && currentSet.equals("Julia Set"))
-		   switchToJulia();
+       //check if switched to Julia and vice versa
+       if(!switched && currentSet.equals("Julia Set"))
+	   switchToJulia();
        if(switched && currentSet.equals("Mandelbrot Set"))
        	   switchBackToMandelbrot();
        
@@ -312,6 +325,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
     * Method which renders chunks of an image at a time. Yields control of the thread for visualization of each chunk.
     * 
     */
+	
    public void renderAll() {
       
       // Continue until the entire image is done
@@ -334,9 +348,10 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
    
    /**
-    * Renders the next chunk.
+    * Method that renders the next chunk.
     * 
-    */   
+    */ 
+	
    private void render() {
       
       // Variables
@@ -398,9 +413,10 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 
    
    /**
-    * Switches setCalculator to mins/maxes pertaining to Julia Set, and switches boolean to true as a check
+    * Method that switches setCalculator to mins/maxes pertaining to Julia Set, and switches boolean to true as a check
     *
     */
+	
    public void switchToJulia()
    {
 	   switched = true;
@@ -408,9 +424,10 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
    }
  
    /**
-    * Switches setCalculator to mins/maxes pertaining to Mandelbrot Set, and switches boolean to false as a check
+    * Method that switches setCalculator to mins/maxes pertaining to Mandelbrot Set, and switches boolean to false as a check
     *
     */
+	
    public void switchBackToMandelbrot()
    {
 	   switched = false;
@@ -420,7 +437,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 }
 
 /**
- * A <code>RainbowGradient</code> class that 
+ * A <code>RainbowGradient</code> class that establishes the options for the list of seed colors, and given n, the limit
+ * of total colors in the gradient, blends the colors in between each seed color to create a gradient.
  * 
  * @author Joseph Salerno
  * @author Brendan Olski
@@ -429,6 +447,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
  * Class: RainbowGradient.java
  * Project: 5
  */
+
 class RainbowGradient {
 	
 	// Defines the list of seed colors
@@ -453,9 +472,10 @@ class RainbowGradient {
 	private static RainbowGradient instance;
 	
        /**
-        * Create or get an instance of RainbowGradient.
+        * Method that creates or gets an instance of RainbowGradient and establishes a default limit value.
         * @return an instance of RainbowGradient
         */
+	
 	public static RainbowGradient getInstance() {
 	   if (instance == null) {
 	      instance = new RainbowGradient(32);
@@ -479,9 +499,10 @@ class RainbowGradient {
 	}
 	
        /**
-    	* Method that set the value of current to greyscale
+    	* Method that sets the value of current to greyscale.
     	*
    	*/
+	
 	public void switchToGreyscale()
 	{
 		colors.clear();
@@ -490,7 +511,7 @@ class RainbowGradient {
 	}
 	
        /**
-    	* Method that set the value of current to greenscale
+    	* Method that sets the value of current to greenscale.
     	*
    	*/
 	public void switchToGreenscale()
@@ -501,9 +522,10 @@ class RainbowGradient {
 	}
 	
        /**
-    	* Method that set the value of current to rainbow
+    	* Method that sets the value of current to rainbow.
     	*
    	*/
+	
 	public void switchToRainbow()
 	{
 		colors.clear();
@@ -512,10 +534,11 @@ class RainbowGradient {
 	}
 	
        /**
-    	* Method that updates the limit and then runs the colorGradientMaker method to update it in there too
+    	* Method that updates the limit and then runs the colorGradientMaker method to update it there as well.
     	* @param limit - int variable that 
 	*
    	*/
+	
 	public void stateOfLimit(int limit) {
 		this.n = limit;
 		
@@ -523,9 +546,11 @@ class RainbowGradient {
 	  }
 	
        /**
-    	* Method that 
+    	* Method that sets the RGB values for the color in the adjacent index of the gradient given the values of the 
+	* previous index and the distance away from the next seed color. 
     	*
    	*/
+	
 	public void colorGradientMaker() {
 		
 		double numColors = (n-1);
@@ -571,9 +596,10 @@ class RainbowGradient {
 	}
 	
 	/**
-    	* Method that retrieves the colors
-    	* @return the colors
+    	* Method that retrieves the full gradient of colors.
+    	* @return the color gradient
    	*/
+	
 	public List<Color> getColors()
 	{
 		return colors;
