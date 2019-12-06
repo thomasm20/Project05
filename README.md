@@ -9,27 +9,27 @@ By Mitchell Thomas, Joe Salerno, and Brendan Olski
 Canvas.java contains a Canvas class that draws the pixels stored in the BufferedImage variable image in chunks and yields thread control for visual updates between chunks.
 
 --Variables--
-doneRendering: private boolean variable ... doing what?
-renderX: private int variable...
-renderY: private int variable...
-width: private int variable...
-height: privat int variable...
-posStart: private Point...
-posEnd: private Point
-drawRect: private Rectangle
-image: pivate BufferedImage
-gImg: private Graphics2D
-scale: private double variable
-gradient: private RainbowGradient
+doneRendering: private boolean variable that tells the program whether or not the image is complete
+renderX: private int variable stores the largest x coordinate that has been rendered
+renderY: private int variable stores the largest y coordinate that has been rendered
+width: private int variable sets the width of the image frame
+height: privat int variable sets the height of the image frame
+posStart: private Point establishes the initial coordinate point to start the new image frame
+posEnd: private Point establishes the final coordinate point to end the new image frame
+drawRect: private Rectangle tells the program whether or not the drag rectangle is being used
+image: private BufferedImage stores the picture to be drawn
+gImg: private Graphics2D draws the image
+scale: private double variable determines how much to scale up the canvas from the default size of 350x200
+gradient: private RainbowGradient used to update the gradient to a new limit or switch the set of seed colors
 
-switched: public boolean
-limit: public int variable
-calc: public SetCalculator
-currentGradient: public String variable
-currentSet: public String variable
+switched: public boolean stores whether or not the set has been switched between Mandelbrot and Julia
+limit: public int variable stores the number of color indices to be included in the color gradient
+calc: public SetCalculator stores the display coordinates for the desired set
+currentGradient: public String variable stores the current arraylist chosen to represent the seed colors
+currentSet: public String variable stores which set has been selected, either Mandelbrot or Julia
 
-colorSelect: final private Color 
-chunkSize: final private int variable that 
+colorSelect: final private Color sets the color of the outline of the drag rectangle
+chunkSize: final private int variable sets the size of each chunk for rendering
 
 --Methods--
 Canvas() - Default constructor for the canvas. Sets the scale to 1.
