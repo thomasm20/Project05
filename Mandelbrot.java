@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
  * Class: Madelbrot.java
  * Project: 5
  */
-
 public class Mandelbrot extends JFrame implements ActionListener{
     
     // Class Variables   
